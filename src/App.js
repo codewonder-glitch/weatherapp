@@ -13,6 +13,8 @@ import Rainy_Weather from './Images/Rainy_Weather.png'
 import Snowy_Weather from './Images/Snowy_Weather.png'
 import Sun_Weather from './Images/Sun_Weather.png'
 
+const Apikey=process.env.REACT_APP_API_KEY
+
 class App extends Component {
   constructor(props){
 super(props);
@@ -62,11 +64,11 @@ this.state={
    findimg(desc)
    {
      switch (desc){
-    case "clouds":
+    case "Clouds":
     return Cloud_Weather
     case "Rain":
     return Rainy_Weather
-    case "Sun":
+    case "Clear":
     return Sun_Weather
     case "Snow":
     return Snowy_Weather
@@ -74,71 +76,116 @@ this.state={
     }
 
    }
+   componentDidUpdate(){
+     this.getData();
+   }
+
+   async getData(){
+   
+      const res=axios.get("https://api.openweathermap.org/data/2.5/forecast?q=irving&appid="+Apikey).
+ then(res=>{
+   this.setState({mintemp:this.fToC(res.data.list[0].main.temp_min),
+   maxtemp:this.fToC(res.data.list[0].main.temp_max),
+   data:res.data,
+   description:this.findimg(res.data.list[0].weather[0].main),
+   day1min:fToC(res.data.list[7].main.temp_min),
+   day1max:fToC(res.data.list[7].main.temp_max),
+   day1desc:this.findimg(res.data.list[7].weather[0].main),
+   day2min:fToC(res.data.list[15].main.temp_min),
+   day2max:fToC(res.data.list[15].main.temp_max),
+   day2desc:this.findimg(res.data.list[15].weather[0].main),
+   day3min:fToC(res.data.list[23].main.temp_min),
+   day3max:fToC(res.data.list[23].main.temp_max),
+   day3desc:this.findimg(res.data.list[23].weather[0].main),
+   day4min:fToC(res.data.list[31].main.temp_min),
+   day4max:fToC(res.data.list[31].main.temp_max),
+   day4desc:this.findimg(res.data.list[31].weather[0].main)
+   })
+
+   console.log("value of day4"+this.findimg(res.data.list[4].weather[0].main));
+ }).catch(function (error) {
+   console.log(error);
+ });
+ 
+
+   
+
+   }
+  fToC(fahrenheit) 
+{
+  var fTemp = fahrenheit;
+  var fToCel = Math.round((fTemp - 32) * 5 / 9);
+  return fToCel;
+} 
 
   
   render(){
-     const res=axios.get("https://api.openweathermap.org/data/2.5/forecast?q=dallas&appid=process.env.REACT_APP_API_KEY").
-then(res=>{
-  this.setState({mintemp:res.data.list[0].main.temp_min,
-  maxtemp:res.data.list[0].main.temp_max,
-  data:res.data,
-  description:this.findimg(res.data.list[0].weather[0].description),
-  day1min:res.data.list[1].main.temp_min,
-  day1max:res.data.list[1].main.temp_max,
-  day1desc:this.findimg(res.data.list[1].weather[0].description),
-  day2min:res.data.list[2].main.temp_min,
-  day2max:res.data.list[2].main.temp_max,
-  day2desc:this.findimg(res.data.list[2].weather[0].description),
-  day3min:res.data.list[3].main.temp_min,
-  day3max:res.data.list[3].main.temp_max,
-  day3desc:this.findimg(res.data.list[3].weather[0].description),
-  day4min:res.data.list[4].main.temp_min,
-  day4max:res.data.list[4].main.temp_max,
-  day4desc:this.findimg(res.data.list[4].weather[0].description)
-  })
-  console.log("value of day4"+this.state.data.list[0].main.temp_max);
-}).catch(function (error) {
-  console.log(error);
-});
+     
+
 
 return (
-   
-         
+  
      <div>
+            <Router>
           <nav>
           <div>
-         <h1>{this.state.mintemp}</h1>
+          <Link to={{ pathname:"/Day1",
+         Mintemp:this.state.mintemp,
+         Maxtemp:this.state.maxtemp}}>
          <img src={this.state.description} />
-      <h1>{this.state.maxtemp}</h1>
+         </Link>
+      <h1></h1>
       {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
       </div>
       <div>
-<h1>{this.state.mintemp}</h1>
-         <img src={this.state.day1desc} />
-      <h1>{this.state.maxtemp}</h1>
+      <Link to={{ pathname:"/Day1",
+         Mintemp:this.state.mintemp,
+         Maxtemp:this.state.maxtemp}}>
+  <img src={this.state.day1desc} />
+     
+         </Link>
       {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
       </div>
       <div>
-         <h1>{this.state.mintemp}</h1>
-         <img src={this.state.day2desc} />
-      <h1>{this.state.maxtemp}</h1>
+      <Link to={{ pathname:"/Day1",
+         Mintemp:this.state.mintemp,
+         Maxtemp:this.state.maxtemp}}>
+  <img src={this.state.day2desc} />
+     
+         </Link>
       {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
       </div>
       <div>
-         <h1>{this.state.mintemp}</h1>
-         <img src={this.state.day3desc} />
-      <h1>{this.state.maxtemp}</h1>
+      <Link to={{ pathname:"/Day1",
+         Mintemp:this.state.mintemp,
+         Maxtemp:this.state.maxtemp}}>
+  <img src={this.state.day3desc} />
+     
+         </Link>
+      
       {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
       </div>
       <div>
-         <h1>{this.state.mintemp}</h1>
-         <img src={this.state.day4desc} />
-      <h1>{this.state.maxtemp}</h1>
+      <Link to={{ pathname:"/Day1",
+         Mintemp:this.state.mintemp,
+         Maxtemp:this.state.maxtemp}}>
+  <img src={this.state.day4desc} />
+     
+         </Link>
+        
       {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
       </div> 
       </nav>
+      <Switch>
+              <Route exact path="/Day0" component={Day1} />
+              <Route exact path="/Day1" component={Day1} />
+              <Route exact path="/Day2" component={Day1} />
+              <Route exact path="/Day3" component={Day1} />
+              <Route exact path="/Day4" component={Day1} />
+              <Route exact path="/Day5" component={Day1} />
+            </Switch>
       
-     
+      </Router>
     </div>
  
   
