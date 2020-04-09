@@ -19,7 +19,7 @@ function today() {
   today();
 
   const birthday = new Date('2020-04-08');
-const day1 = new Date('2020-04-08').getDay();
+const day1 = new Date('2020-04-05').getDay();
 // Sunday - Saturday : 0 - 6
 
 console.log(day1);

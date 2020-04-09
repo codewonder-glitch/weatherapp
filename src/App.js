@@ -82,23 +82,23 @@ this.state={
 
    async getData(){
    
-      const res=await axios.get("https://api.openweathermap.org/data/2.5/forecast?q=irving&appid="+Apikey).
+      const res=await axios.get("https://api.openweathermap.org/data/2.5/forecast?q=irving&appid="+Apikey+"&unit=metric").
  then(res=>{
-   this.setState({mintemp:this.fToC(res.data.list[0].main.temp_min),
-   maxtemp:this.fToC(res.data.list[0].main.temp_max),
+   this.setState({mintemp:res.data.list[0].main.temp_min,
+   maxtemp:res.data.list[0].main.temp_max,
    data1:res.data,
-  //  description:this.findimg(res.data.list[0].weather[0].main),
-  //  day1min:this.fToC(res.data.list[7].main.temp_min),
-  //  day1max:this.fToC(res.data.list[7].main.temp_max),
-  //  day1desc:this.findimg(res.data.list[7].weather[0].main),
-  //  day2min:this.fToC(res.data.list[15].main.temp_min),
-  //  day2max:this.fToC(res.data.list[15].main.temp_max),
-  //  day2desc:this.findimg(res.data.list[15].weather[0].main),
-  //  day3min:this.fToC(res.data.list[23].main.temp_min),
-  //  day3max:this.fToC(res.data.list[23].main.temp_max),
-  //  day3desc:this.findimg(res.data.list[23].weather[0].main),
-  //  day4min:this.fToC(res.data.list[31].main.temp_min),
-  //  day4max:this.fToC(res.data.list[31].main.temp_max),
+   description:this.findimg(res.data.list[0].weather[0].main),
+   day1min:res.data.list[7].main.temp_min,
+   day1max:res.data.list[7].main.temp_max,
+   day1desc:this.findimg(res.data.list[7].weather[0].main),
+   day2min:res.data.list[15].main.temp_min,
+   day2max:res.data.list[15].main.temp_max,
+   day2desc:this.findimg(res.data.list[15].weather[0].main),
+   day3min:res.data.list[23].main.temp_min,
+   day3max:res.data.list[23].main.temp_max,
+   day3desc:this.findimg(res.data.list[23].weather[0].main),
+   day4min:res.data.list[31].main.temp_min,
+   day4max:res.data.list[31].main.temp_max,
    day4desc:this.findimg(res.data.list[31].weather[0].main)
    })
    console.log("State Variable data1 is",this.state.data1)
@@ -112,10 +112,7 @@ this.state={
    
 
    }
-  fToC(fahrenheit) 
-{
-  return 70;
-} 
+  
 
   
   render(){
@@ -177,7 +174,7 @@ return (
       </div> 
       </nav>
       <Switch>
-              <Route exact path="/Day0"><Day1 weatherdata={this.state.data1}/></Route> 
+              <Route exact path="/Day0"><Day1 weatherdata={this.state.data1} date={this.state.date}/></Route> 
               <Route exact path="/Day1" component={Day1} />
               <Route exact path="/Day2" component={Day1} />
               <Route exact path="/Day3" component={Day1} />
