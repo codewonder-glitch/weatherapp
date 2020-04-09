@@ -45,9 +45,12 @@ this.state={
   }
   
   today(dt) {
+    var n;
     var date = new Date(dt);
+    console.log(dt);
     var wkday=date.getDay()
     var weekday = new Array(7);
+    var newStateArray=[]
     weekday[0] = "Sunday";
     weekday[1] = "Monday";
     weekday[2] = "Tuesday";
@@ -56,14 +59,18 @@ this.state={
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
   
-    var n = weekday[wkday];
-    this.setState({
-      cars: [ ...this.state.datearr, ...n]
-    })
+     n = weekday[wkday];
+console.log("wkday is",wkday)
+if(this.state.datearr!==undefined)
+      newStateArray = this.state.datearr.slice();
+newStateArray.push(n);
+this.setState({datearr: newStateArray});
+    
+    console.log(this.state.datearr)
   }
   componentDidMount(){
-    //this.fivedayweather();
-    this.today();
+    
+    this.getData();
    }
    findimg(desc)
    {
@@ -80,9 +87,7 @@ this.state={
     }
 
    }
-   componentDidUpdate(){
-     this.getData();
-   }
+   
 
    async getData(){
    
@@ -105,11 +110,11 @@ this.state={
    day4max:res.data.list[31].main.temp_max,
    day4desc:this.findimg(res.data.list[31].weather[0].main)
    })
-   today(res.data.list[0].dt_txt.split('')[0]);
-   today(res.data.list[7].dt_txt.split('')[0])
-   today(res.data.list[15].dt_txt.split('')[0])
-   today(res.data.list[23].dt_txt.split('')[0])
-   today(res.data.list[31].dt_txt.split('')[0])
+   this.today(res.data.list[0].dt_txt.split(' ')[0]);
+   this.today(res.data.list[7].dt_txt.split(' ')[0])
+   this.today(res.data.list[15].dt_txt.split(' ')[0])
+   this.today(res.data.list[23].dt_txt.split(' ')[0])
+   this.today(res.data.list[31].dt_txt.split(' ')[0])
 
    console.log("State Variable data1 is",this.state.data1)
  }).catch(function (error) {
@@ -132,47 +137,52 @@ this.state={
 return (
   
      <div>
-            <Router>
-          <nav>
-          <div>
-
+       <Router>
+       <div id="container">
+            
+          
+         
+<div>
           <Link to={{pathname:"/Day1"}}>
           <p>{this.state.datearr[0]}</p>
         <img src={this.state.description}  />
 <p>{this.state.mintemp}/{this.state.maxtemp}</p>
          </Link>
      
- 
-      </div>
-      <div>
+ </div>
+ <div>
+    
       <Link to={{ pathname:"/Day1"}}>
       <p>{this.state.datearr[1]}</p>
         <img src={this.state.description}  />
 <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
+         </div>
+ <div>
     
-      </div>
-      <div>
+      
       <Link to={{ pathname:"/Day1"}}>
       <p>{this.state.datearr[2]}</p>
   <img src={this.state.day2desc} />
   <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
-      
-      </div>
-      <div>
+         </div>
+ <div>
+    
+     
       <Link to={{ pathname:"/Day1"}}>
       <p>{this.state.datearr[3]}</p>
   <img src={this.state.day3desc} />
   <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
+         </div>
+ <div>
+    
       
-      
-      </div>
-      <div>
+     
       <Link to={{ pathname:"/Day1"}}>
       <p>{this.state.datearr[4]}</p>
   <img src={this.state.day4desc} />
@@ -180,9 +190,11 @@ return (
      
          </Link>
         
+         </div>
+ 
+    </div>
+    
       
-      </div> 
-      </nav>
       <Switch>
               <Route exact path="/Day0"><Day1 weatherdata={this.state.data1} date={this.state.date}/></Route> 
               <Route exact path="/Day1" component={Day1} />
@@ -192,7 +204,7 @@ return (
               <Route exact path="/Day5" component={Day1} />
             </Switch>
       
-      </Router>
+            </Router>
     </div>
  
   
