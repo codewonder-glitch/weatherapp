@@ -38,13 +38,15 @@ this.state={
     day4min:null,
     day4max:null,
     day4desc:null,
+    datearr:[]
     
 }
 
   }
   
-  today() {
-    var d = new Date();
+  today(dt) {
+    var date = new Date(dt);
+    var wkday=date.getDay()
     var weekday = new Array(7);
     weekday[0] = "Sunday";
     weekday[1] = "Monday";
@@ -54,8 +56,10 @@ this.state={
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
   
-    var n = weekday[d.getDay()];
-  this.setState({day:n});
+    var n = weekday[wkday];
+    this.setState({
+      cars: [ ...this.state.datearr, ...n]
+    })
   }
   componentDidMount(){
     //this.fivedayweather();
@@ -86,7 +90,7 @@ this.state={
  then(res=>{
    this.setState({mintemp:res.data.list[0].main.temp_min,
    maxtemp:res.data.list[0].main.temp_max,
-   data1:res.data,
+  data1:res.data,
    description:this.findimg(res.data.list[0].weather[0].main),
    day1min:res.data.list[7].main.temp_min,
    day1max:res.data.list[7].main.temp_max,
@@ -101,6 +105,12 @@ this.state={
    day4max:res.data.list[31].main.temp_max,
    day4desc:this.findimg(res.data.list[31].weather[0].main)
    })
+   today(res.data.list[0].dt_txt.split('')[0]);
+   today(res.data.list[7].dt_txt.split('')[0])
+   today(res.data.list[15].dt_txt.split('')[0])
+   today(res.data.list[23].dt_txt.split('')[0])
+   today(res.data.list[31].dt_txt.split('')[0])
+
    console.log("State Variable data1 is",this.state.data1)
  }).catch(function (error) {
    console.log(error);
@@ -127,50 +137,50 @@ return (
           <div>
 
           <Link to={{pathname:"/Day1"}}>
-          <p>{this.state.day}</p>
+          <p>{this.state.datearr[0]}</p>
         <img src={this.state.description}  />
 <p>{this.state.mintemp}/{this.state.maxtemp}</p>
          </Link>
      
-      {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
+ 
       </div>
       <div>
       <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.day}</p>
+      <p>{this.state.datearr[1]}</p>
         <img src={this.state.description}  />
 <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
-      {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
+    
       </div>
       <div>
       <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.day}</p>
+      <p>{this.state.datearr[2]}</p>
   <img src={this.state.day2desc} />
   <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
-      {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
+      
       </div>
       <div>
       <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.day}</p>
+      <p>{this.state.datearr[3]}</p>
   <img src={this.state.day3desc} />
   <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
       
-      {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
+      
       </div>
       <div>
       <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.day}</p>
+      <p>{this.state.datearr[4]}</p>
   <img src={this.state.day4desc} />
   <p>{this.state.mintemp}/{this.state.maxtemp}</p>
      
          </Link>
         
-      {/* <Day1 weatherdata={this.state.data} day={this.state.day} /> */}
+      
       </div> 
       </nav>
       <Switch>

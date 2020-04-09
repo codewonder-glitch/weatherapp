@@ -1,19 +1,21 @@
 function today() {
     var d = new Date();
     var weekday = new Array(7);
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
+    weekday[6] = "Sunday";
+    weekday[0] = "Monday";
+    weekday[1] = "Tuesday";
+    weekday[2] = "Wednesday";
+    weekday[3] = "Thursday";
+    weekday[4] = "Friday";
+    weekday[5] = "Saturday";
     let n=[];
-  for(let i=0;i<7;i++)
+  for(let i=1;i<8;i++)
   {
- n.push(weekday[d.getDay()+i]);
+      let y=d.getDay()+i;
+      if(y>6){y=y-7;}
+ n.push(weekday[y]);
   }
- console.log("value of n is"+ n);
+ console.log("value of n is", n);
   }
 
   today();
