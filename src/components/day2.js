@@ -8,12 +8,14 @@ import {
 
 
 export default function Day2(props) {
+  console.log("-----Hello day2")
+    console.log(props.weatherdata);
 let hourlyarr=[];
-    for(let j=0;j<8;j++)
+    for(let j=7;j<=14;j++)
     {
-      var time=this.props.weatherdata.list[j].dt_txt.split(" ")[1];
-    var min=this.props.weatherdata.list[j].main.temp_min;
-    var max=this.props.weatherdata.list[j].main.temp_max;
+      var time=props.weatherdata.list[j].dt_txt.split(" ")[1];
+    var min=props.weatherdata.list[j].main.temp_min;
+    var max=props.weatherdata.list[j].main.temp_max;
     let arrobj={
         Time:time,
         Min:min,
@@ -25,20 +27,8 @@ let hourlyarr=[];
     return(
     
     <div>
-        <ul>
-                <li>
-                  <Link to="/hour">{this.props.day}</Link>
-                </li>
-        </ul>
-        <Switch>
-        <Route path="/hour">
-        <ul>
-        { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.time} Hi: {arrobj.Min} Lo: {arrobj.Max} <br /></li>  )}
-        
-        </ul>
-        </Route>
-        
-        </Switch>
+        { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Min: {arrobj.Min} Max: {arrobj.Max} <br /></li>  )} 
+         
         </div> 
           );
         }

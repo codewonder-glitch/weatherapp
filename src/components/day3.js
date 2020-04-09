@@ -7,12 +7,14 @@ import {
   } from "react-router-dom";
 
 export default function Day3(props) {
+  console.log("-----Hello day 3")
+    console.log(props.weatherdata);
     let hourlyarr=[];
-    for(let j=0;j<6;j++)
+    for(let j=15;j<=22;j++)
     {
-      var time=this.props.weatherdata.list[j].dt_txt.split(" ")[1];
-    var min=this.props.weatherdata.list[j].main.temp_min;
-    var max=this.props.weatherdata.list[j].main.temp_max;
+      var time=props.weatherdata.list[j].dt_txt.split(" ")[1];
+    var min=props.weatherdata.list[j].main.temp_min;
+    var max=props.weatherdata.list[j].main.temp_max;
     let arrobj={
         Time:time,
         Min:min,
@@ -23,20 +25,8 @@ export default function Day3(props) {
     return(
     
     <div>
-      <ul>
-          <li>
-            <Link to="/hour">{this.props.day}</Link>
-          </li>
-      </ul>
-        <Switch>
-          <Route path="/hour">
-            <ul>
-              { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.time} Hi: {arrobj.Min} Lo: {arrobj.Max} <br /></li>  )}
-        
-            </ul>
-          </Route>
-        
-        </Switch>
+      { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Min: {arrobj.Min} Lo: {arrobj.Max} <br /></li>  )} 
+         
     </div> 
           );
         }

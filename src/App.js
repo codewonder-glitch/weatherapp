@@ -8,6 +8,10 @@ import {
 import axios from 'axios';
 import './App.css';
 import Day1 from './components/day1'
+import Day2 from './components/day2'
+import Day3 from './components/day3'
+import Day4 from './components/day4'
+import Day5 from './components/day5'
 import Cloud_Weather from './Images/Cloud_Weather.png'
 import Rainy_Weather from './Images/Rainy_Weather.png'
 import Snowy_Weather from './Images/Snowy_Weather.png'
@@ -18,31 +22,32 @@ const Apikey=process.env.REACT_APP_API_KEY
 class App extends Component {
   constructor(props){
 super(props);
+this.variable=2;
 this.state={
 
   mintemp:[],
-    maxtemp:[],
-    day:null,
-    description0:null,
-    data1:[],
-    hourlyarr:[],
-    day1min:null,
-    day1max:null,
-    day1desc:null,
-    day2min:null,
-    day2max:null,
-    day2desc:null,
-    day3min:null,
-    day3max:null,
-    day3desc:null,
-    day4min:null,
-    day4max:null,
-    day4desc:null,
-    datearr:[]
+  maxtemp:[],
+  day:null,
+  description0:null,
+  data1:[],
+  hourlyarr:[],
+  day1min:null,
+  day1max:null,
+  day1desc:null,
+  day2min:null,
+  day2max:null,
+  day2desc:null,
+  day3min:null,
+  day3max:null,
+  day3desc:null,
+  day4min:null,
+  day4max:null,
+  day4desc:null,
+  datearr:[]
     
 }
 
-  }
+}
   
   today(dt) {
     var n;
@@ -60,20 +65,21 @@ this.state={
     weekday[6] = "Saturday";
   
      n = weekday[wkday];
-console.log("wkday is",wkday)
-if(this.state.datearr!==undefined)
+
+    if(this.state.datearr!==undefined)
       newStateArray = this.state.datearr.slice();
-newStateArray.push(n);
-this.setState({datearr: newStateArray});
-    
-    console.log(this.state.datearr)
-  }
+      newStateArray.push(n);
+      this.setState({datearr: newStateArray});
+      console.log(this.state.datearr)
+    }
+
   componentDidMount(){
-    
+    console.log(this.variable)
     this.getData();
-   }
+  }
+
    findimg(desc)
-   {
+  {
      switch (desc){
     case "Clouds":
     return Cloud_Weather
@@ -92,7 +98,7 @@ this.setState({datearr: newStateArray});
    async getData(){
    
       const res=await axios.get("https://api.openweathermap.org/data/2.5/forecast?q=irving&appid="+Apikey+"&unit=metric").
- then(res=>{
+    then(res=>{
    this.setState({mintemp:res.data.list[0].main.temp_min,
    maxtemp:res.data.list[0].main.temp_max,
   data1:res.data,
@@ -115,8 +121,6 @@ this.setState({datearr: newStateArray});
    this.today(res.data.list[15].dt_txt.split(' ')[0])
    this.today(res.data.list[23].dt_txt.split(' ')[0])
    this.today(res.data.list[31].dt_txt.split(' ')[0])
-
-   console.log("State Variable data1 is",this.state.data1)
  }).catch(function (error) {
    console.log(error);
  });
@@ -136,76 +140,64 @@ this.setState({datearr: newStateArray});
 
 return (
   
-     <div>
-       <Router>
-       <div id="container">
-            
-          
-         
-<div>
+  <div>
+    <Router>
+      <div id="container">
+        <div>
           <Link to={{pathname:"/Day1"}}>
           <p>{this.state.datearr[0]}</p>
-        <img src={this.state.description}  />
-<p>{this.state.mintemp}/{this.state.maxtemp}</p>
-         </Link>
-     
- </div>
- <div>
+          <img src={this.state.description}  />
+          <p>{this.state.mintemp}/{this.state.maxtemp}</p>
+          </Link>
+        </div>
+ 
+      <div>
+          <Link to={{ pathname:"/Day2"}}>
+          <p>{this.state.datearr[1]}</p>
+          <img src={this.state.description}  />
+          <p>{this.state.mintemp}/{this.state.maxtemp}</p>
+          </Link>
+      </div>
+ 
     
-      <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.datearr[1]}</p>
-        <img src={this.state.description}  />
-<p>{this.state.mintemp}/{this.state.maxtemp}</p>
-     
-         </Link>
-         </div>
- <div>
-    
-      
-      <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.datearr[2]}</p>
-  <img src={this.state.day2desc} />
-  <p>{this.state.mintemp}/{this.state.maxtemp}</p>
-     
-         </Link>
-         </div>
- <div>
-    
-     
-      <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.datearr[3]}</p>
-  <img src={this.state.day3desc} />
-  <p>{this.state.mintemp}/{this.state.maxtemp}</p>
-     
-         </Link>
-         </div>
- <div>
-    
-      
-     
-      <Link to={{ pathname:"/Day1"}}>
-      <p>{this.state.datearr[4]}</p>
-  <img src={this.state.day4desc} />
-  <p>{this.state.mintemp}/{this.state.maxtemp}</p>
-     
-         </Link>
-        
-         </div>
+      <div>
+          <Link to={{ pathname:"/Day3"}}>
+          <p>{this.state.datearr[2]}</p>
+          <img src={this.state.day2desc} />
+          <p>{this.state.mintemp}/{this.state.maxtemp}</p>
+          </Link>
+      </div>
+ 
+ 
+      <div>
+        <Link to={{ pathname:"/Day4"}}>
+        <p>{this.state.datearr[3]}</p>
+        <img src={this.state.day3desc} />
+        <p>{this.state.mintemp}/{this.state.maxtemp}</p>
+        </Link>
+      </div>
+ 
+ 
+      <div>
+        <Link to={{ pathname:"/Day5"}}>
+        <p>{this.state.datearr[4]}</p>
+        <img src={this.state.day4desc} />
+        <p>{this.state.mintemp}/{this.state.maxtemp}</p>
+        </Link>
+       </div>
  
     </div>
     
-      
       <Switch>
-              <Route exact path="/Day0"><Day1 weatherdata={this.state.data1} date={this.state.date}/></Route> 
-              <Route exact path="/Day1" component={Day1} />
-              <Route exact path="/Day2" component={Day1} />
-              <Route exact path="/Day3" component={Day1} />
-              <Route exact path="/Day4" component={Day1} />
-              <Route exact path="/Day5" component={Day1} />
-            </Switch>
+        <Route exact path="/Day1"><Day1 weatherdata={this.state.data1} /></Route>  
+        <Route exact path="/Day2"><Day2 weatherdata={this.state.data1} /></Route>  
+        <Route exact path="/Day3"> <Day3 weatherdata={this.state.data1} /></Route> 
+        <Route exact path="/Day4"> <Day4 weatherdata={this.state.data1} /></Route> 
+        <Route exact path="/Day5"><Day5 weatherdata={this.state.data1} /></Route> 
+      </Switch>
       
-            </Router>
-    </div>
+    </Router>
+  </div>
  
   
 )}
