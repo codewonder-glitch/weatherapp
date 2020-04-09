@@ -6,8 +6,9 @@ import {
     Link
   } from "react-router-dom";
 export default function Day1(props) {
-    console.log(props.day);
-    //console.log(props.weatherdata.list[1].main.temp_min);
+   console.log("Hello")
+    console.log(props.weatherdata);
+ 
 
 // let hourlyarr=[];
 //     for(let j=0;j<6;j++)
