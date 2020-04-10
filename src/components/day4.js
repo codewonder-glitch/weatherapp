@@ -26,7 +26,7 @@ export default function Day4(props) {
     
     <div>
      
-     { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Min: {arrobj.Min} Lo: {arrobj.Max} <br /></li>  )} 
+     { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Lo: {arrobj.Min} Hi: {arrobj.Max} <br /></li>  )} 
          
     </div> 
           );
