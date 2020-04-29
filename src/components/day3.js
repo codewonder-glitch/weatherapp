@@ -10,7 +10,7 @@ export default function Day3(props) {
   console.log("-----Hello day 3")
     console.log(props.weatherdata);
     let hourlyarr=[];
-    for(let j=16;j<=24;j++)
+    for(let j=16;j<=23;j++)
     {
       var time=props.weatherdata.list[j].dt_txt.split(" ")[1];
     var min=props.weatherdata.list[j].main.temp_min;
