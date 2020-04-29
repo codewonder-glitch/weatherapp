@@ -10,7 +10,7 @@ export default function Day4(props) {
   console.log("-----Hello day4")
     console.log(props.weatherdata);
     let hourlyarr=[];
-    for(let j=23;j<=30;j++)
+    for(let j=24;j<=32;j++)
     {
       var time=props.weatherdata.list[j].dt_txt.split(" ")[1];
     var min=props.weatherdata.list[j].main.temp_min;
@@ -24,7 +24,7 @@ export default function Day4(props) {
  }
     return(
     
-    <div>
+      <div className="rendertimetemp">
      
      { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Lo: {arrobj.Min} Hi: {arrobj.Max} <br /></li>  )} 
          

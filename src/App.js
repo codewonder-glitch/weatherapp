@@ -103,24 +103,24 @@ this.state={
    maxtemp:res.data.list[0].main.temp_max,
   data1:res.data,
    description:this.findimg(res.data.list[0].weather[0].main),
-   day1min:res.data.list[7].main.temp_min,
-   day1max:res.data.list[7].main.temp_max,
-   day1desc:this.findimg(res.data.list[7].weather[0].main),
-   day2min:res.data.list[15].main.temp_min,
-   day2max:res.data.list[15].main.temp_max,
-   day2desc:this.findimg(res.data.list[15].weather[0].main),
-   day3min:res.data.list[23].main.temp_min,
-   day3max:res.data.list[23].main.temp_max,
-   day3desc:this.findimg(res.data.list[23].weather[0].main),
-   day4min:res.data.list[31].main.temp_min,
-   day4max:res.data.list[31].main.temp_max,
-   day4desc:this.findimg(res.data.list[31].weather[0].main)
+   day1min:res.data.list[8].main.temp_min,
+   day1max:res.data.list[8].main.temp_max,
+   day1desc:this.findimg(res.data.list[8].weather[0].main),
+   day2min:res.data.list[16].main.temp_min,
+   day2max:res.data.list[16].main.temp_max,
+   day2desc:this.findimg(res.data.list[16].weather[0].main),
+   day3min:res.data.list[24].main.temp_min,
+   day3max:res.data.list[24].main.temp_max,
+   day3desc:this.findimg(res.data.list[24].weather[0].main),
+   day4min:res.data.list[32].main.temp_min,
+   day4max:res.data.list[32].main.temp_max,
+   day4desc:this.findimg(res.data.list[32].weather[0].main)
    })
    this.today(res.data.list[0].dt_txt.split(' ')[0]);
-   this.today(res.data.list[7].dt_txt.split(' ')[0])
-   this.today(res.data.list[15].dt_txt.split(' ')[0])
-   this.today(res.data.list[23].dt_txt.split(' ')[0])
-   this.today(res.data.list[31].dt_txt.split(' ')[0])
+   this.today(res.data.list[8].dt_txt.split(' ')[0])
+   this.today(res.data.list[16].dt_txt.split(' ')[0])
+   this.today(res.data.list[24].dt_txt.split(' ')[0])
+   this.today(res.data.list[32].dt_txt.split(' ')[0])
  }).catch(function (error) {
    console.log(error);
  });

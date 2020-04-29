@@ -7,10 +7,10 @@ import {
   } from "react-router-dom";
 
 export default function Day5(props) {
-  console.log("-----Hello day5")
-    console.log(props.weatherdata);
+ 
+  
     let hourlyarr=[];
-    for(let j=30;j<=37;j++)
+    for(let j=32;j<=39;j++)
     {
       var time=props.weatherdata.list[j].dt_txt.split(" ")[1];
     var min=props.weatherdata.list[j].main.temp_min;
@@ -24,7 +24,7 @@ export default function Day5(props) {
  }
     return(
     
-    <div>
+      <div className="rendertimetemp">
        { hourlyarr.map( (arrobj, id)=><li key={id}> Time: {arrobj.Time} Lo: {arrobj.Min} Hi: {arrobj.Max} <br /></li>  )} 
          
     </div> 
